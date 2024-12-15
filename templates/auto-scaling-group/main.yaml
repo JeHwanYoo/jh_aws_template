@@ -10,11 +10,11 @@ Resources:
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/example/auto-scaling-group/vpc.yaml"
+      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/vpc.yaml"
   ALBStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/example/auto-scaling-group/alb.yaml"
+      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/alb.yaml"
       Parameters:
         VpcId: !GetAtt VPCStack.Outputs.VpcId
         PublicSubnet1Id: !GetAtt VPCStack.Outputs.PublicSubnet1Id
@@ -22,7 +22,7 @@ Resources:
   ASGStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/example/auto-scaling-group/asg.yaml"
+      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg.yaml"
       Parameters:
         VpcId: !GetAtt VPCStack.Outputs.VpcId
         PrivateSubnet1Id: !GetAtt VPCStack.Outputs.PrivateSubnet1Id
@@ -33,12 +33,12 @@ Resources:
   ASGPolicyAndAlarmStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/example/auto-scaling-group/asg-policy-and-alarm.yaml"
+      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg-policy-and-alarm.yaml"
       Parameters:
         AutoScalingGroupName: !GetAtt ASGStack.Outputs.AutoScalingGroup
   ASGPolicyAndScheduleStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/example/auto-scaling-group/asg-policy-and-schedule.yaml"
+      TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg-policy-and-schedule.yaml"
       Parameters:
         AutoScalingGroupName: !GetAtt ASGStack.Outputs.AutoScalingGroup

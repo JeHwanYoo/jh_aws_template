@@ -17,7 +17,7 @@
 
 ## CFN 실행하기
 
-- example/auto-scaling-group/main.yaml 을 실행하면 다음과 같은 리소스가 만들어집니다.
+- templates/auto-scaling-group/main.yaml 을 실행하면 다음과 같은 리소스가 만들어집니다.
 - [CloudFormation이란?](https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/Welcome.html)
 
 ![](./assets/HA.jpg)
@@ -43,7 +43,7 @@ BUCKET_NAME=# 생성한 버킷 이름을 입력해주세요!
 
 aws s3 sync . s3://"$BUCKET_NAME" \
   --exclude "*" \
-  --include "example/**/*.yaml" \
+  --include "templates/**/*.yaml" \
   --profile "$AWS_PROFILE"
 ```
 
@@ -59,7 +59,7 @@ MAIN_FILE_PATH=auto-scaling-group/main.yaml
 
 aws cloudformation create-stack \
   --stack-name "$STACK_NAME" \
-  --template-url https://s3.amazonaws.com/"$BUCKET_NAME"/example/"$MAIN_FILE_PATH" \
+  --template-url https://s3.amazonaws.com/"$BUCKET_NAME"/templates/"$MAIN_FILE_PATH" \
   --parameters ParameterKey=TemplateBucket,ParameterValue="$BUCKET_NAME" \
   --capabilities CAPABILITY_NAMED_IAM \
   --profile "$AWS_PROFILE"
@@ -77,7 +77,7 @@ MAIN_FILE_PATH=auto-scaling-group/main.yaml
 
 aws cloudformation update-stack \
   --stack-name "$STACK_NAME" \
-  --template-url https://s3.amazonaws.com/"$BUCKET_NAME"/example/"$MAIN_FILE_PATH" \
+  --template-url https://s3.amazonaws.com/"$BUCKET_NAME"/templates/"$MAIN_FILE_PATH" \
   --parameters ParameterKey=TemplateBucket,ParameterValue="$BUCKET_NAME" \
   --capabilities CAPABILITY_NAMED_IAM \
   --profile "$AWS_PROFILE"
