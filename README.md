@@ -1,6 +1,4 @@
-# hanghae-dev-lap-ha-dr
-
-클라우드로 무장한 고가용성 및 장애복구 비법
+# JH AWS Template
 
 ## 사전 준비사항
 
@@ -99,15 +97,3 @@ aws cloudformation delete-stack --stack-name "$STACK_NAME" --profile "$AWS_PROFI
 ## FAQ
 
 혹시 동작중에 문제가 있거나, 궁금한 점이 있다면 Issue에 올려주세요.
-
-## Todo
-
-- [x] EC2 AutoScalingGroup
-- [ ] EC2 웜 풀
-- [ ] DynamoDB Global Table
-- [ ] DynamoDB Backup
-- [ ] RDS Read Replica
-- [ ] RDS Backup
-- [ ] AWS ECS + CodePipeline CI/CD
-- [ ] 고가용성 지표 측정
-- [ ] ... (계속 아이디어 생각 중)
