@@ -10,10 +10,12 @@ Resources:
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
+      StackName: VPCStack
       TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/vpc.yaml"
   ALBStack:
     Type: AWS::CloudFormation::Stack
     Properties:
+      StackName: ALBStack
       TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/alb.yaml"
       Parameters:
         VpcId: !GetAtt VPCStack.Outputs.VpcId
@@ -22,6 +24,7 @@ Resources:
   ASGStack:
     Type: AWS::CloudFormation::Stack
     Properties:
+      StackName: ASGStack
       TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg.yaml"
       Parameters:
         VpcId: !GetAtt VPCStack.Outputs.VpcId
@@ -33,12 +36,14 @@ Resources:
   ASGPolicyAndAlarmStack:
     Type: AWS::CloudFormation::Stack
     Properties:
+      StackName: ASGPolicyAndAlarmStack
       TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg-policy-and-alarm.yaml"
       Parameters:
         AutoScalingGroupName: !GetAtt ASGStack.Outputs.AutoScalingGroup
   ASGPolicyAndScheduleStack:
     Type: AWS::CloudFormation::Stack
     Properties:
+      StackName: ASGPolicyAndScheduleStack
       TemplateURL: !Sub "https://s3.amazonaws.com/${TemplateBucket}/templates/auto-scaling-group/asg-policy-and-schedule.yaml"
       Parameters:
         AutoScalingGroupName: !GetAtt ASGStack.Outputs.AutoScalingGroup
